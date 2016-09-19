@@ -1,0 +1,1 @@
+include ':app', ':ayo-core', ':ayo-lang', ':ayo-http', ':worker-okhttp', ':converter-fastjson', ':ayo-animate', ':ayo-list', ':ayo-view', ':ayo-notify', ':ayo-template'

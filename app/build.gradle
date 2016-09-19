@@ -1,0 +1,79 @@
+apply plugin: 'com.android.application'
+
+Properties configer = new Properties()
+configer.load(new FileInputStream(file("../config.properties")))
+
+android {
+    compileSdkVersion Integer.valueOf(configer['compileSdkVersion'])
+    buildToolsVersion configer['buildToolsVersion']
+
+    defaultConfig {
+        applicationId "com.worse.more.breaker"
+        minSdkVersion Integer.valueOf(configer['minSdkVersion'])
+        targetSdkVersion Integer.valueOf(configer['targetSdkVersion'])
+        versionCode Integer.valueOf(configer['versionCode'])
+        versionName configer['versionName']
+        vectorDrawables.useSupportLibrary = true
+    }
+//    signingConfigs {
+//        release {
+//            keyAlias signConfiger['KEY_ALIAS']
+//            keyPassword signConfiger['KEY_PASSWORD']
+//            storeFile file(signConfiger['KEYSTORE_FILE'])
+//            storePassword signConfiger['KEYSTORE_PASSWORD']
+//        }
+//    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+//            signingConfig signingConfigs.release
+        }
+        debug {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+//            signingConfig signingConfigs.release
+        }
+    }
+
+    sourceSets {
+        main {
+            jniLibs.srcDirs = ['libs']
+            java.srcDirs = ['src/main/java']
+        }
+    }
+
+    productFlavors {
+        google {
+            manifestPlaceholders = [UMENG_CHANNEL_VALUE: "google"]
+        }
+    }
+}
+
+afterEvaluate {
+    tasks.matching {
+        it.name.startsWith('dex')
+    }.each { dx ->
+        if (dx.additionalParameters == null) {
+            dx.additionalParameters = []
+        }
+        dx.additionalParameters += '--multi-dex' // enable multidex
+    }
+
+}
+
+dependencies {
+    compile fileTree(include: ['*.jar'], dir: 'libs')
+    testCompile 'junit:junit:4.12'
+    compile project(':ayo-core')
+    compile project(':ayo-lang')
+    compile project(':ayo-http')
+    compile project(':worker-okhttp')
+    compile project(':converter-fastjson')
+    compile project(':ayo-animate')
+    compile project(':ayo-list')
+    compile project(':ayo-notify')
+    compile project(':ayo-template')
+    compile project(':ayo-view')
+}
