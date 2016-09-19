@@ -12,7 +12,7 @@
     * git push origin master
 
 * 项目引入：Ayo整体库配置
-    * ayo-core：核心库，对应目录ayo-core，引入模块':ayo-core/ayo-core'
+    * ayo-core：核心库
         * 这里放的是框架级的, ayocore里换东西，应该会影响到项目框架了
         * 区别于sdk，放的应该是常用工具类，如转换，日期，文件，什么的，sdk不会影响项目架构
         * 包括：
@@ -31,16 +31,10 @@
             * ButterKnife和Dagger2引入
             * DB依赖：AyoDB，取自XUtils
             * ACache
-        * https://github.com/cowthan/AyoCore.git
-        * git@github.com:cowthan/AyoCore.git
-        * permission用的：https://github.com/00ec454/Ask
-    * ayo-lang：基础库--lang，对应目录ayo-lang，引入模块':ayo-lang/ayo-lang'
-        * https://github.com/cowthan/AyoSdk.git
-        * git@github.com:cowthan/AyoSdk.git
+    * ayo-lang：基础库
         * 常用工具类，提供工具和语法上的便利，仅此而已
-    * ayo-http：基础库--http，对应目录ayo-http，引入模块':ayo-http/ayo-http',':ayo-http/worker-okhttp',':ayo-http/ayo-converter-fastjson'
-        * https://github.com/cowthan/AyoHttp.git
-        * git@github.com:cowthan/AyoHttp.git
+    * ayo-http：基础库
+        * 需要指定worker和converter
     * 图片四件套
         * 选择：图库--MediaChooser
         * 选择：拍照--SquareCamera
